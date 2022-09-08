@@ -1,0 +1,80 @@
+﻿<!--
+    Author: Derek Ackworth
+    Purpose: Log in GUI and bind data/commands to the view model
+-->
+    
+<UserControl
+    x:Class="InvestmentPortfolio.Views.LogInView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Width="320"
+    Height="145">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        
+        <!--Row 1-->
+        <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" FontWeight="Bold" FontSize="26" Content="Log In"/>
+
+        <!--Row 2-->
+        <Grid Grid.Row="1">
+            <TextBox Width="200" Margin="10 5 10 5" MaxLength="20" ToolTip="Username" Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}">
+                <TextBox.InputBindings>
+                    <KeyBinding Key="Enter" Command="{Binding LogInCommand}"/>
+                </TextBox.InputBindings>
+            </TextBox>
+            <TextBlock Width="200" Margin="4 5 0 0" Foreground="DarkGray" IsHitTestVisible="False" Text="Username">
+                <TextBlock.Style>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="Visibility" Value="Collapsed"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Username}" Value="">
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+        </Grid>
+
+        <!--Row 3-->
+        <Grid Grid.Row="2">
+            <TextBox Margin="10 5 10 5" Width="200" MaxLength="100" FontFamily="pack://application:,,,/Resources/#Password" ToolTip="Password"
+                     Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}">
+                <TextBox.InputBindings>
+                    <KeyBinding Key="Enter" Command="{Binding LogInCommand}"/>
+                </TextBox.InputBindings>
+            </TextBox>
+            <TextBlock Width="200" Margin="4 5 0 0" Foreground="DarkGray" IsHitTestVisible="False" Text="Password">
+                <TextBlock.Style>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="Visibility" Value="Collapsed"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Password}" Value="">
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+        </Grid>
+
+        <!--Row 4-->
+        <Grid Grid.Row="3" Width="200">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            
+            <Button Grid.Column="0" Margin="0 5 0 0" Command="{Binding LogInCommand}" Content="Log In"/>
+            <Button Grid.Column="1" Margin="10 5 0 0" Command="{Binding SignUpCommand}" Content="Sign Up"/>
+        </Grid>
+    </Grid>
+</UserControl>

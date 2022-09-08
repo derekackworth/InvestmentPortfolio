@@ -1,0 +1,26 @@
+﻿<!--
+    Author: Derek Ackworth
+    Purpose: Container for other views and bind data to the view model
+-->
+    
+<Window
+    x:Class="InvestmentPortfolio.Views.MainView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Title="{Binding CurrentViewModel.Title}"
+    SizeToContent="WidthAndHeight"
+    ResizeMode="CanMinimize"
+    FontSize="14">
+    <Grid Style="{StaticResource GridStyle}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="7*"/>
+        </Grid.ColumnDefinitions>
+        
+        <ContentControl Grid.Column="0" Content="{Binding SidebarViewModel}"/>
+        <ContentControl Grid.Column="{Binding CurrentViewModel.Column}" Grid.ColumnSpan="{Binding CurrentViewModel.ColumnSpan}" Content="{Binding CurrentViewModel}"/>
+    </Grid>
+</Window>
